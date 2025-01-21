@@ -1,0 +1,575 @@
+"stage";"Year";"Location";"total"
+"1";"adult";1998;"gjerøy";46
+"2";"adult";1998;"hestmannøy";85
+"3";"adult";1998;"indre kvarøy";39
+"4";"adult";1998;"nesøy";21
+"5";"adult";1999;"aldra";7
+"6";"adult";1999;"gjerøy";62
+"7";"adult";1999;"hestmannøy";119
+"8";"adult";1999;"indre kvarøy";44
+"9";"adult";1999;"lovund";24
+"10";"adult";1999;"nesøy";18
+"11";"adult";1999;"selvær";77
+"12";"adult";1999;"sleneset";36
+"13";"adult";1999;"træna";62
+"14";"adult";2000;"aldra";18
+"15";"adult";2000;"gjerøy";61
+"16";"adult";2000;"hestmannøy";109
+"17";"adult";2000;"indre kvarøy";26
+"18";"adult";2000;"nesøy";26
+"19";"adult";2001;"aldra";28
+"20";"adult";2001;"gjerøy";47
+"21";"adult";2001;"hestmannøy";105
+"22";"adult";2001;"indre kvarøy";31
+"23";"adult";2001;"nesøy";24
+"24";"adult";2002;"aldra";29
+"25";"adult";2002;"gjerøy";36
+"26";"adult";2002;"hestmannøy";63
+"27";"adult";2002;"indre kvarøy";31
+"28";"adult";2002;"nesøy";19
+"29";"adult";2003;"aldra";30
+"30";"adult";2003;"gjerøy";36
+"31";"adult";2003;"hestmannøy";73
+"32";"adult";2003;"indre kvarøy";30
+"33";"adult";2003;"lovund";18
+"34";"adult";2003;"nesøy";11
+"35";"adult";2003;"selvær";10
+"36";"adult";2003;"træna";4
+"37";"adult";2004;"aldra";42
+"38";"adult";2004;"gjerøy";47
+"39";"adult";2004;"hestmannøy";75
+"40";"adult";2004;"indre kvarøy";25
+"41";"adult";2004;"lovund";27
+"42";"adult";2004;"myken";17
+"43";"adult";2004;"nesøy";15
+"44";"adult";2004;"selvær";31
+"45";"adult";2004;"sleneset";17
+"46";"adult";2004;"træna";21
+"47";"adult";2005;"aldra";52
+"48";"adult";2005;"gjerøy";42
+"49";"adult";2005;"hestmannøy";102
+"50";"adult";2005;"indre kvarøy";33
+"51";"adult";2005;"lovund";20
+"52";"adult";2005;"myken";17
+"53";"adult";2005;"nesøy";23
+"54";"adult";2005;"selvær";47
+"55";"adult";2005;"sleneset";14
+"56";"adult";2005;"træna";32
+"57";"adult";2006;"aldra";35
+"58";"adult";2006;"gjerøy";50
+"59";"adult";2006;"hestmannøy";116
+"60";"adult";2006;"indre kvarøy";30
+"61";"adult";2006;"lovund";29
+"62";"adult";2006;"myken";14
+"63";"adult";2006;"nesøy";13
+"64";"adult";2006;"selvær";29
+"65";"adult";2006;"sleneset";24
+"66";"adult";2006;"træna";25
+"67";"adult";2007;"aldra";38
+"68";"adult";2007;"gjerøy";55
+"69";"adult";2007;"hestmannøy";166
+"70";"adult";2007;"indre kvarøy";42
+"71";"adult";2007;"lovund";17
+"72";"adult";2007;"myken";14
+"73";"adult";2007;"nesøy";10
+"74";"adult";2007;"selvær";42
+"75";"adult";2007;"sleneset";26
+"76";"adult";2007;"træna";49
+"77";"adult";2008;"aldra";43
+"78";"adult";2008;"gjerøy";95
+"79";"adult";2008;"hestmannøy";137
+"80";"adult";2008;"indre kvarøy";45
+"81";"adult";2008;"lovund";20
+"82";"adult";2008;"myken";10
+"83";"adult";2008;"nesøy";11
+"84";"adult";2008;"selvær";45
+"85";"adult";2008;"sleneset";28
+"86";"adult";2008;"træna";20
+"87";"adult";2009;"aldra";47
+"88";"adult";2009;"gjerøy";89
+"89";"adult";2009;"hestmannøy";139
+"90";"adult";2009;"indre kvarøy";29
+"91";"adult";2009;"lovund";19
+"92";"adult";2009;"myken";9
+"93";"adult";2009;"nesøy";13
+"94";"adult";2009;"selvær";38
+"95";"adult";2009;"sleneset";20
+"96";"adult";2009;"træna";34
+"97";"adult";2010;"aldra";20
+"98";"adult";2010;"gjerøy";99
+"99";"adult";2010;"hestmannøy";158
+"100";"adult";2010;"indre kvarøy";50
+"101";"adult";2010;"lovund";23
+"102";"adult";2010;"myken";11
+"103";"adult";2010;"nesøy";13
+"104";"adult";2010;"selvær";29
+"105";"adult";2010;"sleneset";25
+"106";"adult";2010;"træna";35
+"107";"adult";2011;"aldra";11
+"108";"adult";2011;"gjerøy";129
+"109";"adult";2011;"hestmannøy";225
+"110";"adult";2011;"indre kvarøy";60
+"111";"adult";2011;"lovund";35
+"112";"adult";2011;"myken";23
+"113";"adult";2011;"nesøy";16
+"114";"adult";2011;"selvær";69
+"115";"adult";2011;"sleneset";32
+"116";"adult";2011;"træna";72
+"117";"adult";2012;"aldra";21
+"118";"adult";2012;"gjerøy";139
+"119";"adult";2012;"hestmannøy";124
+"120";"adult";2012;"indre kvarøy";48
+"121";"adult";2012;"lovund";20
+"122";"adult";2012;"myken";19
+"123";"adult";2012;"nesøy";16
+"124";"adult";2012;"selvær";41
+"125";"adult";2012;"sleneset";15
+"126";"adult";2012;"træna";45
+"127";"adult";2013;"aldra";11
+"128";"adult";2013;"gjerøy";128
+"129";"adult";2013;"hestmannøy";90
+"130";"adult";2013;"indre kvarøy";48
+"131";"adult";2013;"lovund";63
+"132";"adult";2013;"myken";6
+"133";"adult";2013;"nesøy";6
+"134";"adult";2013;"selvær";44
+"135";"adult";2013;"sleneset";27
+"136";"adult";2013;"træna";57
+"137";"adult";2014;"aldra";8
+"138";"adult";2014;"gjerøy";58
+"139";"adult";2014;"hestmannøy";93
+"140";"adult";2014;"indre kvarøy";47
+"141";"adult";2014;"lovund";25
+"142";"adult";2014;"nesøy";4
+"143";"adult";2014;"selvær";36
+"144";"adult";2014;"sleneset";31
+"145";"adult";2014;"træna";73
+"146";"adult";2015;"gjerøy";29
+"147";"adult";2015;"hestmannøy";112
+"148";"adult";2015;"indre kvarøy";67
+"149";"adult";2015;"lovund";36
+"150";"adult";2015;"myken";4
+"151";"adult";2015;"nesøy";3
+"152";"adult";2015;"selvær";57
+"153";"adult";2015;"sleneset";24
+"154";"adult";2015;"træna";114
+"155";"adult";2016;"aldra";4
+"156";"adult";2016;"gjerøy";31
+"157";"adult";2016;"hestmannøy";78
+"158";"adult";2016;"indre kvarøy";67
+"159";"adult";2016;"lovund";34
+"160";"adult";2016;"myken";11
+"161";"adult";2016;"nesøy";8
+"162";"adult";2016;"selvær";30
+"163";"adult";2016;"sleneset";27
+"164";"adult";2016;"træna";89
+"165";"adult";2017;"aldra";5
+"166";"adult";2017;"gjerøy";17
+"167";"adult";2017;"hestmannøy";97
+"168";"adult";2017;"indre kvarøy";59
+"169";"adult";2017;"lovund";44
+"170";"adult";2017;"myken";5
+"171";"adult";2017;"nesøy";8
+"172";"adult";2017;"selvær";21
+"173";"adult";2017;"sleneset";32
+"174";"adult";2017;"træna";73
+"175";"adult";2018;"aldra";7
+"176";"adult";2018;"gjerøy";29
+"177";"adult";2018;"hestmannøy";93
+"178";"adult";2018;"indre kvarøy";46
+"179";"adult";2018;"lovund";31
+"180";"adult";2018;"myken";13
+"181";"adult";2018;"nesøy";18
+"182";"adult";2018;"selvær";29
+"183";"adult";2018;"sleneset";16
+"184";"adult";2018;"træna";72
+"185";"adult";2019;"gjerøy";39
+"186";"adult";2019;"hestmannøy";112
+"187";"adult";2019;"indre kvarøy";24
+"188";"adult";2019;"lovund";14
+"189";"adult";2019;"myken";6
+"190";"adult";2019;"nesøy";3
+"191";"adult";2019;"selvær";11
+"192";"adult";2019;"sleneset";9
+"193";"fledge";1998;"gjerøy";37
+"194";"fledge";1998;"hestmannøy";75
+"195";"fledge";1998;"indre kvarøy";22
+"196";"fledge";1998;"nesøy";6
+"197";"fledge";1999;"aldra";9
+"198";"fledge";1999;"gjerøy";22
+"199";"fledge";1999;"hestmannøy";54
+"200";"fledge";1999;"indre kvarøy";27
+"201";"fledge";1999;"lovund";35
+"202";"fledge";1999;"nesøy";12
+"203";"fledge";1999;"selvær";47
+"204";"fledge";1999;"sleneset";37
+"205";"fledge";1999;"træna";41
+"206";"fledge";2000;"aldra";30
+"207";"fledge";2000;"gjerøy";34
+"208";"fledge";2000;"hestmannøy";68
+"209";"fledge";2000;"indre kvarøy";30
+"210";"fledge";2000;"nesøy";6
+"211";"fledge";2001;"aldra";11
+"212";"fledge";2001;"gjerøy";28
+"213";"fledge";2001;"hestmannøy";52
+"214";"fledge";2001;"indre kvarøy";25
+"215";"fledge";2001;"nesøy";4
+"216";"fledge";2002;"aldra";15
+"217";"fledge";2002;"gjerøy";50
+"218";"fledge";2002;"hestmannøy";84
+"219";"fledge";2002;"indre kvarøy";37
+"220";"fledge";2002;"nesøy";8
+"221";"fledge";2003;"aldra";27
+"222";"fledge";2003;"gjerøy";42
+"223";"fledge";2003;"hestmannøy";89
+"224";"fledge";2003;"indre kvarøy";53
+"225";"fledge";2003;"lovund";30
+"226";"fledge";2003;"nesøy";6
+"227";"fledge";2003;"selvær";31
+"228";"fledge";2003;"træna";39
+"229";"fledge";2004;"aldra";22
+"230";"fledge";2004;"gjerøy";40
+"231";"fledge";2004;"hestmannøy";94
+"232";"fledge";2004;"indre kvarøy";35
+"233";"fledge";2004;"lovund";28
+"234";"fledge";2004;"myken";30
+"235";"fledge";2004;"nesøy";8
+"236";"fledge";2004;"selvær";17
+"237";"fledge";2004;"sleneset";19
+"238";"fledge";2004;"træna";32
+"239";"fledge";2005;"aldra";1
+"240";"fledge";2005;"gjerøy";28
+"241";"fledge";2005;"hestmannøy";94
+"242";"fledge";2005;"indre kvarøy";13
+"243";"fledge";2005;"lovund";24
+"244";"fledge";2005;"myken";13
+"245";"fledge";2005;"nesøy";13
+"246";"fledge";2005;"selvær";22
+"247";"fledge";2005;"sleneset";38
+"248";"fledge";2005;"træna";130
+"249";"fledge";2006;"aldra";23
+"250";"fledge";2006;"gjerøy";43
+"251";"fledge";2006;"hestmannøy";111
+"252";"fledge";2006;"indre kvarøy";32
+"253";"fledge";2006;"lovund";9
+"254";"fledge";2006;"myken";14
+"255";"fledge";2006;"nesøy";14
+"256";"fledge";2006;"selvær";14
+"257";"fledge";2006;"sleneset";21
+"258";"fledge";2006;"træna";89
+"259";"fledge";2007;"aldra";28
+"260";"fledge";2007;"gjerøy";88
+"261";"fledge";2007;"hestmannøy";179
+"262";"fledge";2007;"indre kvarøy";52
+"263";"fledge";2007;"lovund";8
+"264";"fledge";2007;"myken";14
+"265";"fledge";2007;"nesøy";3
+"266";"fledge";2007;"selvær";17
+"267";"fledge";2007;"sleneset";11
+"268";"fledge";2007;"træna";125
+"269";"fledge";2008;"aldra";21
+"270";"fledge";2008;"gjerøy";77
+"271";"fledge";2008;"hestmannøy";132
+"272";"fledge";2008;"indre kvarøy";53
+"273";"fledge";2008;"lovund";26
+"274";"fledge";2008;"myken";19
+"275";"fledge";2008;"nesøy";6
+"276";"fledge";2008;"selvær";33
+"277";"fledge";2008;"sleneset";39
+"278";"fledge";2008;"træna";40
+"279";"fledge";2009;"aldra";22
+"280";"fledge";2009;"gjerøy";77
+"281";"fledge";2009;"hestmannøy";165
+"282";"fledge";2009;"indre kvarøy";36
+"283";"fledge";2009;"lovund";40
+"284";"fledge";2009;"myken";16
+"285";"fledge";2009;"nesøy";21
+"286";"fledge";2009;"selvær";44
+"287";"fledge";2009;"sleneset";51
+"288";"fledge";2009;"træna";74
+"289";"fledge";2010;"aldra";5
+"290";"fledge";2010;"gjerøy";90
+"291";"fledge";2010;"hestmannøy";134
+"292";"fledge";2010;"indre kvarøy";58
+"293";"fledge";2010;"lovund";42
+"294";"fledge";2010;"myken";15
+"295";"fledge";2010;"nesøy";14
+"296";"fledge";2010;"selvær";54
+"297";"fledge";2010;"sleneset";40
+"298";"fledge";2010;"træna";63
+"299";"fledge";2011;"aldra";18
+"300";"fledge";2011;"gjerøy";123
+"301";"fledge";2011;"hestmannøy";188
+"302";"fledge";2011;"indre kvarøy";85
+"303";"fledge";2011;"lovund";40
+"304";"fledge";2011;"myken";43
+"305";"fledge";2011;"nesøy";14
+"306";"fledge";2011;"selvær";104
+"307";"fledge";2011;"sleneset";24
+"308";"fledge";2011;"træna";155
+"309";"fledge";2012;"aldra";7
+"310";"fledge";2012;"gjerøy";131
+"311";"fledge";2012;"hestmannøy";55
+"312";"fledge";2012;"indre kvarøy";49
+"313";"fledge";2012;"lovund";35
+"314";"fledge";2012;"myken";23
+"315";"fledge";2012;"nesøy";4
+"316";"fledge";2012;"selvær";38
+"317";"fledge";2012;"sleneset";19
+"318";"fledge";2012;"træna";91
+"319";"fledge";2013;"aldra";9
+"320";"fledge";2013;"gjerøy";64
+"321";"fledge";2013;"hestmannøy";116
+"322";"fledge";2013;"indre kvarøy";59
+"323";"fledge";2013;"lovund";58
+"324";"fledge";2013;"myken";12
+"325";"fledge";2013;"nesøy";8
+"326";"fledge";2013;"selvær";51
+"327";"fledge";2013;"sleneset";48
+"328";"fledge";2013;"træna";120
+"329";"fledge";2014;"aldra";1
+"330";"fledge";2014;"gjerøy";30
+"331";"fledge";2014;"hestmannøy";66
+"332";"fledge";2014;"indre kvarøy";63
+"333";"fledge";2014;"lovund";47
+"334";"fledge";2014;"nesøy";7
+"335";"fledge";2014;"selvær";77
+"336";"fledge";2014;"sleneset";69
+"337";"fledge";2014;"træna";169
+"338";"fledge";2015;"gjerøy";44
+"339";"fledge";2015;"hestmannøy";47
+"340";"fledge";2015;"indre kvarøy";42
+"341";"fledge";2015;"lovund";27
+"342";"fledge";2015;"myken";6
+"343";"fledge";2015;"selvær";80
+"344";"fledge";2015;"sleneset";17
+"345";"fledge";2015;"træna";149
+"346";"fledge";2016;"aldra";3
+"347";"fledge";2016;"gjerøy";38
+"348";"fledge";2016;"hestmannøy";71
+"349";"fledge";2016;"indre kvarøy";72
+"350";"fledge";2016;"lovund";73
+"351";"fledge";2016;"myken";11
+"352";"fledge";2016;"nesøy";8
+"353";"fledge";2016;"selvær";61
+"354";"fledge";2016;"sleneset";38
+"355";"fledge";2016;"træna";192
+"356";"fledge";2017;"aldra";3
+"357";"fledge";2017;"gjerøy";7
+"358";"fledge";2017;"hestmannøy";79
+"359";"fledge";2017;"indre kvarøy";41
+"360";"fledge";2017;"lovund";45
+"361";"fledge";2017;"myken";3
+"362";"fledge";2017;"nesøy";19
+"363";"fledge";2017;"selvær";53
+"364";"fledge";2017;"sleneset";55
+"365";"fledge";2017;"træna";152
+"366";"fledge";2018;"gjerøy";35
+"367";"fledge";2018;"hestmannøy";57
+"368";"fledge";2018;"indre kvarøy";22
+"369";"fledge";2018;"lovund";19
+"370";"fledge";2018;"myken";9
+"371";"fledge";2018;"nesøy";17
+"372";"fledge";2018;"selvær";45
+"373";"fledge";2018;"sleneset";34
+"374";"fledge";2018;"træna";112
+"375";"fledge";2019;"gjerøy";42
+"376";"fledge";2019;"hestmannøy";131
+"377";"fledge";2019;"indre kvarøy";10
+"378";"fledge";2019;"lovund";63
+"379";"fledge";2019;"myken";14
+"380";"fledge";2019;"nesøy";2
+"381";"fledge";2019;"selvær";51
+"382";"fledge";2019;"sleneset";46
+"383";"nest";1998;"gjerøy";59
+"384";"nest";1998;"hestmannøy";109
+"385";"nest";1998;"indre kvarøy";36
+"386";"nest";1998;"nesøy";18
+"387";"nest";1999;"aldra";5
+"388";"nest";1999;"gjerøy";50
+"389";"nest";1999;"hestmannøy";94
+"390";"nest";1999;"indre kvarøy";46
+"391";"nest";1999;"lovund";91
+"392";"nest";1999;"nesøy";18
+"393";"nest";1999;"selvær";113
+"394";"nest";1999;"sleneset";77
+"395";"nest";1999;"træna";85
+"396";"nest";2000;"aldra";17
+"397";"nest";2000;"gjerøy";69
+"398";"nest";2000;"hestmannøy";80
+"399";"nest";2000;"indre kvarøy";9
+"400";"nest";2000;"nesøy";19
+"401";"nest";2001;"aldra";11
+"402";"nest";2001;"gjerøy";59
+"403";"nest";2001;"hestmannøy";57
+"404";"nest";2001;"indre kvarøy";35
+"405";"nest";2001;"nesøy";18
+"406";"nest";2002;"aldra";27
+"407";"nest";2002;"gjerøy";83
+"408";"nest";2002;"hestmannøy";109
+"409";"nest";2002;"indre kvarøy";54
+"410";"nest";2002;"nesøy";13
+"411";"nest";2003;"aldra";24
+"412";"nest";2003;"gjerøy";44
+"413";"nest";2003;"hestmannøy";119
+"414";"nest";2003;"indre kvarøy";30
+"415";"nest";2003;"lovund";61
+"416";"nest";2003;"nesøy";11
+"417";"nest";2003;"selvær";49
+"418";"nest";2003;"træna";78
+"419";"nest";2004;"aldra";22
+"420";"nest";2004;"gjerøy";42
+"421";"nest";2004;"hestmannøy";109
+"422";"nest";2004;"indre kvarøy";22
+"423";"nest";2004;"lovund";37
+"424";"nest";2004;"myken";19
+"425";"nest";2004;"nesøy";39
+"426";"nest";2004;"selvær";82
+"427";"nest";2004;"sleneset";59
+"428";"nest";2004;"træna";79
+"429";"nest";2005;"aldra";14
+"430";"nest";2005;"gjerøy";28
+"431";"nest";2005;"hestmannøy";114
+"432";"nest";2005;"indre kvarøy";48
+"433";"nest";2005;"lovund";55
+"434";"nest";2005;"myken";41
+"435";"nest";2005;"nesøy";56
+"436";"nest";2005;"selvær";89
+"437";"nest";2005;"sleneset";64
+"438";"nest";2005;"træna";125
+"439";"nest";2006;"aldra";22
+"440";"nest";2006;"gjerøy";49
+"441";"nest";2006;"hestmannøy";158
+"442";"nest";2006;"indre kvarøy";37
+"443";"nest";2006;"lovund";36
+"444";"nest";2006;"myken";32
+"445";"nest";2006;"nesøy";64
+"446";"nest";2006;"selvær";74
+"447";"nest";2006;"sleneset";49
+"448";"nest";2006;"træna";92
+"449";"nest";2007;"aldra";11
+"450";"nest";2007;"gjerøy";51
+"451";"nest";2007;"hestmannøy";178
+"452";"nest";2007;"indre kvarøy";42
+"453";"nest";2007;"lovund";23
+"454";"nest";2007;"myken";22
+"455";"nest";2007;"nesøy";44
+"456";"nest";2007;"selvær";98
+"457";"nest";2007;"sleneset";78
+"458";"nest";2007;"træna";163
+"459";"nest";2008;"aldra";33
+"460";"nest";2008;"gjerøy";80
+"461";"nest";2008;"hestmannøy";98
+"462";"nest";2008;"indre kvarøy";80
+"463";"nest";2008;"lovund";27
+"464";"nest";2008;"myken";31
+"465";"nest";2008;"nesøy";31
+"466";"nest";2008;"selvær";70
+"467";"nest";2008;"sleneset";38
+"468";"nest";2008;"træna";57
+"469";"nest";2009;"aldra";27
+"470";"nest";2009;"gjerøy";131
+"471";"nest";2009;"hestmannøy";192
+"472";"nest";2009;"indre kvarøy";6
+"473";"nest";2009;"lovund";53
+"474";"nest";2009;"myken";12
+"475";"nest";2009;"nesøy";35
+"476";"nest";2009;"selvær";91
+"477";"nest";2009;"sleneset";81
+"478";"nest";2009;"træna";107
+"479";"nest";2010;"aldra";19
+"480";"nest";2010;"gjerøy";152
+"481";"nest";2010;"hestmannøy";142
+"482";"nest";2010;"indre kvarøy";87
+"483";"nest";2010;"lovund";47
+"484";"nest";2010;"myken";33
+"485";"nest";2010;"nesøy";44
+"486";"nest";2010;"selvær";91
+"487";"nest";2010;"sleneset";68
+"488";"nest";2010;"træna";78
+"489";"nest";2011;"aldra";14
+"490";"nest";2011;"gjerøy";170
+"491";"nest";2011;"hestmannøy";253
+"492";"nest";2011;"indre kvarøy";33
+"493";"nest";2011;"lovund";75
+"494";"nest";2011;"myken";67
+"495";"nest";2011;"nesøy";61
+"496";"nest";2011;"selvær";127
+"497";"nest";2011;"sleneset";70
+"498";"nest";2011;"træna";134
+"499";"nest";2012;"aldra";25
+"500";"nest";2012;"gjerøy";212
+"501";"nest";2012;"hestmannøy";76
+"502";"nest";2012;"indre kvarøy";61
+"503";"nest";2012;"lovund";33
+"504";"nest";2012;"myken";47
+"505";"nest";2012;"nesøy";50
+"506";"nest";2012;"selvær";40
+"507";"nest";2012;"sleneset";95
+"508";"nest";2012;"træna";56
+"509";"nest";2013;"aldra";10
+"510";"nest";2013;"gjerøy";90
+"511";"nest";2013;"hestmannøy";99
+"512";"nest";2013;"indre kvarøy";86
+"513";"nest";2013;"lovund";69
+"514";"nest";2013;"myken";16
+"515";"nest";2013;"nesøy";19
+"516";"nest";2013;"selvær";85
+"517";"nest";2013;"sleneset";75
+"518";"nest";2013;"træna";131
+"519";"nest";2014;"aldra";1
+"520";"nest";2014;"gjerøy";50
+"521";"nest";2014;"hestmannøy";63
+"522";"nest";2014;"indre kvarøy";85
+"523";"nest";2014;"lovund";56
+"524";"nest";2014;"nesøy";28
+"525";"nest";2014;"selvær";128
+"526";"nest";2014;"sleneset";92
+"527";"nest";2014;"træna";161
+"528";"nest";2015;"gjerøy";20
+"529";"nest";2015;"hestmannøy";51
+"530";"nest";2015;"indre kvarøy";68
+"531";"nest";2015;"lovund";40
+"532";"nest";2015;"myken";10
+"533";"nest";2015;"nesøy";8
+"534";"nest";2015;"selvær";129
+"535";"nest";2015;"sleneset";68
+"536";"nest";2015;"træna";181
+"537";"nest";2016;"aldra";9
+"538";"nest";2016;"gjerøy";13
+"539";"nest";2016;"hestmannøy";40
+"540";"nest";2016;"indre kvarøy";75
+"541";"nest";2016;"lovund";44
+"542";"nest";2016;"myken";27
+"543";"nest";2016;"nesøy";17
+"544";"nest";2016;"selvær";63
+"545";"nest";2016;"sleneset";85
+"546";"nest";2016;"træna";132
+"547";"nest";2017;"aldra";5
+"548";"nest";2017;"gjerøy";2
+"549";"nest";2017;"hestmannøy";95
+"550";"nest";2017;"indre kvarøy";73
+"551";"nest";2017;"lovund";70
+"552";"nest";2017;"myken";10
+"553";"nest";2017;"nesøy";43
+"554";"nest";2017;"selvær";51
+"555";"nest";2017;"sleneset";91
+"556";"nest";2017;"træna";137
+"557";"nest";2018;"aldra";1
+"558";"nest";2018;"gjerøy";42
+"559";"nest";2018;"hestmannøy";130
+"560";"nest";2018;"indre kvarøy";45
+"561";"nest";2018;"lovund";94
+"562";"nest";2018;"myken";24
+"563";"nest";2018;"nesøy";96
+"564";"nest";2018;"selvær";148
+"565";"nest";2018;"sleneset";173
+"566";"nest";2018;"træna";170
+"567";"nest";2019;"gjerøy";29
+"568";"nest";2019;"hestmannøy";181
+"569";"nest";2019;"indre kvarøy";32
+"570";"nest";2019;"lovund";33
+"571";"nest";2019;"myken";5
+"572";"nest";2019;"nesøy";31
+"573";"nest";2019;"selvær";40
+"574";"nest";2019;"sleneset";91

@@ -1,0 +1,31 @@
+"stage";"Location";"total"
+"1";"adult";"aldra";456
+"2";"adult";"gjerøy";1364
+"3";"adult";"hestmannøy";2471
+"4";"adult";"indre kvarøy";921
+"5";"adult";"lovund";499
+"6";"adult";"myken";179
+"7";"adult";"nesøy";299
+"8";"adult";"selvær";686
+"9";"adult";"sleneset";403
+"10";"adult";"træna";877
+"11";"fledge";"aldra";255
+"12";"fledge";"gjerøy";1170
+"13";"fledge";"hestmannøy";2141
+"14";"fledge";"indre kvarøy";916
+"15";"fledge";"lovund";649
+"16";"fledge";"myken";242
+"17";"fledge";"nesøy";200
+"18";"fledge";"selvær";839
+"19";"fledge";"sleneset";606
+"20";"fledge";"træna";1773
+"21";"nest";"aldra";297
+"22";"nest";"gjerøy";1525
+"23";"nest";"hestmannøy";2547
+"24";"nest";"indre kvarøy";1090
+"25";"nest";"lovund";944
+"26";"nest";"myken";396
+"27";"nest";"nesøy";763
+"28";"nest";"selvær";1568
+"29";"nest";"sleneset";1354
+"30";"nest";"træna";1966
