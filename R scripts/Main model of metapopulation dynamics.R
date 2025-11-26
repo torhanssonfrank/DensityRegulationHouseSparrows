@@ -561,7 +561,7 @@ stopifnot(
 nest_to_rec_IPM_genquant_block<- sampling(mod,data = stan_data, pars = params,
                                           chains = nc, iter = ni, thin = nt, init = inits,
                                           cores=nc)
-##OBS! Island Stan is created using the island column, not the location column like in the fledge script#####
+
 
 saveRDS(nest_to_rec_IPM_genquant_block, "Workspace backup/nest_to_rec_IPM_genquant_block.rds")
 nest_to_rec_IPM_genquant_block<-readRDS("Workspace backup/nest_to_rec_IPM_genquant_block.rds")
@@ -782,7 +782,7 @@ pdf(file = "Figures empirical data/Fledge to rec adult gamma elasticity ratio ne
     width = 6.5, # The width of the plot in inches 6.43
     height = 5) # 3.92
 
-plot(log(gamma_fledge_to_rec_ad_ratio)  ~ elasticity_ratio, data = elast_ratio,
+plot(log(gamma_fledge_to_rec_ad_ratio)  ~ log(elasticity_ratio), data = elast_ratio,
      ylab = "", 
      xlab = "",
      col = in_out+1, pch=16)
@@ -800,7 +800,8 @@ legend("topright", legend=c("Inner farm islands", "Outer non-farm islands"),
        col=c("red", "black"), pch = 16, cex=1)
 
 dev.off()
-#N_corr
+
+##Corrected population size ####
 
 nest_to_rec_IPM_genquant_block %>% 
   spread_draws(p[Island_stan, Year_stan]) %>% 
@@ -822,42 +823,13 @@ year_island_IDs<-N %>%
   mutate(Year = as.numeric(Year)) %>% 
   mutate(Year_stan = as.numeric(as.factor(Year)))
 
-isl_ids<-data_observed %>% 
-  dplyr::select(Location, Island, in_out) %>% 
-  filter(Island != 33) %>% 
-  unique() %>% 
-  mutate(Island_stan = as.numeric(as.factor(Island)))
+
 
 year_island_IDs <- year_island_IDs %>% 
-  left_join(isl_ids)
+  left_join(inout)
 
 
 N_corr<-N_corr %>% 
   left_join(year_island_IDs)
-demo_name<-demo %>% 
-  rename(Location = Islandname)
 
-demo_name %>% 
-  filter(Location == "myken" & Year == 2014)
-
-N_corr<-N_corr %>% 
-  left_join(demo_name)
-
-N_corr %>% 
-  filter(Island_stan == 2) %>% 
-  print(n =28)
-
-N_corr_print <- N_corr %>% 
-  dplyr::select(Location,Island, Year, N_corr, .lower, .upper, .width, N_obs)
-
-N_corr_print[is.na(N_corr_print$Location),]
-
-N_corr_print %>% 
-  filter(Location == "aldra") %>% 
-  print(n = 28)
-
-N_corr_print %>% 
-  filter(is.na(Location))
-##Print estimated pop sizes ####
-
-write_delim(N_corr_print, "Cleaned data for density dependence analyses/estimated_pop_sizes_nestling_to_adult_model.txt", delim = ";")
+N_corr
