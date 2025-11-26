@@ -8,18 +8,21 @@ library(rstan)
 library(arm)
 library(tidybayes)
 
-pres<-read.delim("Data/cleaned_pres_data_1994_2022.txt", sep =";", stringsAsFactors = F)
-data_observed<-read.table("Data/cleaned_density_dependence_data.txt", sep=";", header=TRUE)
+pres<-read.delim("Data/presence_data_1994_2022.txt", sep =";", stringsAsFactors = F, encoding = "UTF-8")
+sex_gen_corr<-read.table("Data/sex_genetically_corrected.txt", sep=";", header=TRUE)
 
 
 ##Create a stage column ####
-pres_stage<-pres_clean %>% 
+pres_stage<-pres %>% 
   mutate(lifestage = ifelse(stage == "nest", "nest",
                             ifelse(stage != "nest" & Least_age == 0, "fledge",
                                    ifelse(Least_age == 1, "recruit",
                                           ifelse(Least_age>1,"adult", NA)))))
 
 head(pres_stage)
+
+pres_stage<-pres_stage %>% 
+  mutate(date = as.Date(date))
 
 #save this for later. Here we want to know if an individual is born in "other helgeland" or lurøy-onøy.
 #this is so that we get the correct number of nestlings for each island.
@@ -34,7 +37,7 @@ born_locations<-pres_stage %>%
 
 
 
-#We can do full CH. We should be able to do all years even when looping over stages?
+#subset years
 
 pres_stage<-pres_stage %>% 
   filter(Year>=1994 & Year<=2022)
@@ -75,33 +78,7 @@ nest_floks<-nest_floks %>%
 nrow(nest_floks)
 length(unique(nest_floks$ID))
 
-#Fledglings
-fledge_floks<-pres_stage %>% 
-  filter(lifestage == "fledge") %>% 
-  dplyr::select(ID,Year, Island, Location) %>% 
-  unique()
-length(unique(fledge_floks$ID))
-
-fledge_floks %>%
-  group_by(ID) %>% 
-  filter(n()>1) #here there are many, which was expected. We retain the last observation, likely reflecting dispersal.
-
-fledge_floks<-pres_stage %>% 
-  filter(lifestage == "fledge") %>% 
-  dplyr::select(ID,Year,date, Island, Location) %>% 
-  unique() %>%
-  group_by(ID) %>% 
-  filter(date == max(date)) %>% 
-  ungroup() %>% 
-  dplyr::select(-date)
-
-length(unique(fledge_floks$ID))
-nrow(fledge_floks)
-
-fledge_floks %>%
-  group_by(ID) %>% 
-  filter(n()>1) #now we have none.
-
+##adults
 rec_ad_floks<-pres_stage %>% 
   filter(lifestage %in% c("recruit","adult")) %>% 
   dplyr::select(ID, Island, Location) %>% 
@@ -310,12 +287,8 @@ ncol(nestling_year)
 
 colnames(pres_stage)
 
-##Create sex column. Use genetically corrected sex from data observed for the years when we have it ####
-sex_gen_corr<-data_observed %>% 
-  dplyr::select(ID, sex) %>% 
-  unique()
+##Create sex column. Use genetically corrected sex for the years when we have it ####
 
-unique(pres_stage$scriptsex)
 
 sex_ecol<-pres_stage %>% 
   dplyr::select(ID, scriptsex) %>% 
@@ -364,7 +337,7 @@ ads_no_sex<-max_ages %>%
 
 length(unique(ads_no_sex$ID)) #90 adults don't have sex. Assign a random sex
 
-#90 adults don't have sex. I assign a random sex to those so that we can have them inform recapture rates
+#90 adults don't have sex. Assign a random sex to those so that they can inform recapture rates
 sex<-sex %>% 
   mutate(sex_combined = ifelse(ID %in% ads_no_sex$ID, rbinom(90,1,0.5), sex_combined))
 sex %>% 
@@ -372,7 +345,7 @@ sex %>%
   print(n=90)
 
 #Since we cannot have NA in stan we need to assign a value to NA's in sex (all juveniles who never recruit). 
-#Then it is super important to have an adult design matrix!
+#Needs an adult design matrix to remove these in Stan.
 
 
 sex$sex_combined[is.na(sex$sex_combined)] <- 0
@@ -393,8 +366,7 @@ nest_rec_ad_floks %>%
 
 length(unique(nest_rec_ad_floks$ID))
 
-#we only have 534 dispersers if we don't include juveniles ringed as fledgling.
-#Maybe we can get away with removing dispersers.
+#we only have 534 dispersers.
 
 islands_wide<-nest_rec_ad_floks %>% 
   dplyr::select(ID, Year, Island_stan) %>% 
@@ -462,11 +434,12 @@ N_rec<-demo4 %>%
 N_rec[is.na(N_rec)] <- 1
 N_rec[N_rec == 0] <- 1 #change 0 to 1. Most of these values will be excluded in the loop.
 
+unique(demo4$Location)
+length(unique(demo4$Location))
 
-inout<-data_observed %>% 
-  dplyr::select(Island, in_out) %>% 
-  filter(Island != 33) %>%
-  mutate(Island_stan = as.numeric(as.factor(Island))) %>% 
+inout<-demo4 %>% 
+  mutate(in_out = ifelse(Location %in% c("aldra", "gjerøy", "hestmannøy", "indre kvarøy", "nesøy"),1,0)) %>% 
+  dplyr::select(Island,Island_stan, in_out) %>% 
   unique() %>% 
   arrange(Island_stan)
 
@@ -539,12 +512,12 @@ N_stan<-N %>%
 
 N_rec<-N_rec %>% 
   dplyr::select(-Island_stan)
-nFY<-nrow(N)*ncol(N)
-FY <- as.data.frame(N)
+nFY<-nrow(N_stan)*ncol(N_stan)
+FY <- as.data.frame(N_stan)
 FY[]<-1:nFY
 colnames(FY)<-NULL #Just to avoid confusion.Naming doesn't matter. FY references different years for FY_phi and FY_p. Recapture is assessed up to the last year but survival is assessed up to the last year - 1.
 
-nFY<-nrow(FY)*ncol(FY) #remember! THe codes won't point to the same year for p and phi. phi excludes the last year and p the first.
+nFY<-nrow(FY)*ncol(FY) #remember! The codes won't point to the same year for p and phi. phi excludes the last year and p the first.
 
 stan_data <- list(y =CH,  nind = dim(CH)[1], n_occasions =
                     dim(CH)[2], flok=islands, nflok=max(islands), start_year = start_year$start_year_stan,
@@ -555,7 +528,7 @@ stan_data <- list(y =CH,  nind = dim(CH)[1], n_occasions =
 )
 
 
-##Run model with individuals ringed as nestlings and adults (not fledglings), quant gen block. With age and age_sq, mean centred####
+##Run Stan model####
 
 
 inits <- function() list(
@@ -567,8 +540,8 @@ inits <- function() list(
 
 init_list <- inits()
 str(init_list)
-#changed priors to 0,2 and 0,1 from 0, 1 and 0, 0.5
-mod<-stan_model("Stan scripts/IPM/CMR nest to ad dispersers ELASTICITY gen quant block.stan")
+
+mod<-stan_model("Stan scripts/CMR nest to ad dispersers ELASTICITY gen quant block.stan")
 
 params <- c("mu_phi","mu_phi_rec","B_sex","B_age", "B_age_sq","B_sex_age", "B_in_out", "B_in_out_rec", "gamma","gamma_rec","gamma_in_out", "gamma_in_out_rec", "mu_p", "Sigma2_YI_p",
             "Sigma2_isl_phi","Sigma2_isl_phi_rec","Sigma2_isl_gamma", "Sigma2_isl_gamma_rec", 
@@ -588,7 +561,7 @@ stopifnot(
 nest_to_rec_IPM_genquant_block<- sampling(mod,data = stan_data, pars = params,
                                           chains = nc, iter = ni, thin = nt, init = inits,
                                           cores=nc)
-##OBS OBS OBS! ISLAND STAN IS CREATED USING THE ISLAND COLUMN, NOT THE LOCATION COLUMN LIKE IN THE FLEDGE SCRIPT!#####
+##OBS! Island Stan is created using the island column, not the location column like in the fledge script#####
 
 saveRDS(nest_to_rec_IPM_genquant_block, "Workspace backup/nest_to_rec_IPM_genquant_block.rds")
 nest_to_rec_IPM_genquant_block<-readRDS("Workspace backup/nest_to_rec_IPM_genquant_block.rds")
@@ -600,7 +573,7 @@ rstan::check_hmc_diagnostics(nest_to_rec_IPM_genquant_block)
 library(bayesplot)
 library(mcmcplots)
 mcmc<-As.mcmc.list(nest_to_rec_IPM_genquant_block)
-rstan::traceplot(nest_to_rec_IPM_genquant_block, pars =params1[1:13])
+rstan::traceplot(nest_to_rec_IPM_genquant_block, pars =params[1:13])
 denplot(mcmc, parms = c("Sigma2_isl_gamma_rec", "Sigma2_isl_phi_rec", "cov_isl_rec"))
 
 nest_to_rec_IPM_genquant_block %>% 
@@ -612,7 +585,7 @@ nest_to_rec_IPM_genquant_block %>%
   spread_draws(Sigma2_isl_phi, Sigma2_isl_gamma, cov_isl) %>%
   mutate(corr_ad = cov_isl/(sqrt(Sigma2_isl_phi)*sqrt(Sigma2_isl_gamma))) %>% 
   median_qi(corr_ad)
-class(nest_to_rec_IPM_genquant_block)
+
 x<-as.data.frame(round(summary(nest_to_rec_IPM_genquant_block)$summary[, c(6,4,8,9,10)],5))
 
 x %>% 
@@ -631,10 +604,10 @@ elast_frame<-nest_to_rec_IPM_genquant_block %>%
   ungroup() %>% 
   dplyr::select(Island_stan, row, col, elasticity)
 
-isl_loc<-data_observed %>% 
+isl_loc<-demo4 %>% 
   dplyr::select(Island, Location) %>% 
-  filter(Island != 33) %>% 
   unique()
+
 inout<-inout %>% 
   left_join(isl_loc)
 
