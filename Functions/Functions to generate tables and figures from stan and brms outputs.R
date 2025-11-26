@@ -92,12 +92,13 @@ table_wrangler_smart<-function(tables,col_headers,sigfigs,n_fixef, paramlatex){
   output <-output %>% 
     arrange(factor(Parameter, levels = corr_order$Parameter.latex))
   
-  newrow= c('\\textbf{Fixed effects} ($\\beta$)',NA, NA,NA)
+ 
+  newrow= c('\\textbf{Fixed effects} ($\\beta$)', rep(NA, length(col_headers)))
   output <- rbind(newrow,output)
   
   
   r = n_fixef + 1 #one extra row since we've added the fixed effects header
-  newrow= c('\\textbf{Random effects} ($\\sigma^2$)',NA, NA,NA)
+  newrow= c('\\textbf{Random effects} ($\\sigma^2$)',rep(NA, length(col_headers)))
   output<-rbind(output[1:r,],newrow,output[-(1:r),])
   
   output<-output %>% 
@@ -146,7 +147,7 @@ stan_postplot<-function(stan_model,r0_fig_name,gamma_fig_name){
   
   mcmc_areas(stan_model,point_est = "median", pars =c(print(isl_r0), "r_0"))+
     scale_y_discrete(
-      labels = c("r_0" = "Meta-population",
+      labels = c("r_0" = "Metapopulation",
                  "isl_r0[1]" = "Aldra",
                  "isl_r0[2]" = "Gjerøy",
                  "isl_r0[3]" = "Hestmannøy",
@@ -169,7 +170,7 @@ stan_postplot<-function(stan_model,r0_fig_name,gamma_fig_name){
   
   mcmc_areas(stan_model,point_est = "median", pars =c(print(isl_g), "gamma"))+
     scale_y_discrete(
-      labels = c("gamma" = "Meta-population",
+      labels = c("gamma" = "Metapopulation",
                  "isl_g[1]" = "Aldra",
                  "isl_g[2]" = "Gjerøy",
                  "isl_g[3]" = "Hestmannøy",
@@ -253,20 +254,22 @@ brm_blups_islands<-function(brm_model,density_variable, fitness, divide_intercep
     filter(in_out == 1) %>% 
     dplyr::select(Location) %>% 
     unique()
+  
+  outer$Location <- gsub(" ", "\\.", outer$Location) # replace the space in indre kvarøy with a dot to match the syntax of the model results
 
   if(density_variable == "n"){
 
     brm_islands<-brm_model %>% 
-      spread_draws(b_Intercept, b_n, b_in_out,`b_n:in_out`, r_Location[Location,Parameter]) %>% 
-      mutate(Estimate = case_when(Parameter == "n" & !Location %in%  outer$Location ~ b_n+ r_Location,
-                                  Parameter == "n" & Location %in%  outer$Location ~ b_n+ r_Location + `b_n:in_out`,
+      spread_draws(b_Intercept, b_n_new, b_in_out,`b_n_new:in_out`, r_Location[Location,Parameter]) %>% 
+      mutate(Estimate = case_when(Parameter == "n_new" & !Location %in%  outer$Location ~ b_n_new+ r_Location,
+                                  Parameter == "n_new" & Location %in%  outer$Location ~ b_n_new+ r_Location + `b_n_new:in_out`,
                                   Parameter == "Intercept" & !Location %in%  outer$Location ~ b_Intercept+r_Location,
                                   Parameter == "Intercept" & Location %in%  outer$Location ~b_Intercept+r_Location + b_in_out)) %>% 
       rename(Island = Location)
     
     if(average_metapars == "yes"){
       brm_islands<-brm_islands %>% 
-        mutate(b_n = b_n + `b_n:in_out`/2) %>% 
+        mutate(b_n_new = b_n_new + `b_n_new:in_out`/2) %>% 
         mutate(b_Intercept = b_Intercept + b_in_out/2)
     } else if(average_metapars == "no"){
       print("Warning, when metapars is set to no the metapopulation intercept and slope represent inner islands")
@@ -290,15 +293,15 @@ brm_blups_islands<-function(brm_model,density_variable, fitness, divide_intercep
     
     brm_metapop<-brm_islands %>% 
       ungroup() %>% 
-      rename(r0 = b_Intercept, g = b_n) %>% 
+      rename(r0 = b_Intercept, g = b_n_new) %>% 
       median_qi(r0, g) %>%
-      mutate(Island = "meta-population") %>% 
+      mutate(Island = "metapopulation") %>% 
       dplyr::select(Island, r0, r0.lower, r0.upper, g, g.lower, g.upper)
     
     brm_blups<- brm_islands %>% 
       median_qi(Estimate) %>% 
       pivot_wider(values_from = c(Estimate, .lower, .upper), names_from = Parameter) %>% 
-      rename(r0 = Estimate_Intercept , g = Estimate_n , r0.lower = .lower_Intercept, r0.upper = .upper_Intercept, g.lower = .lower_n, g.upper = .upper_n) %>% 
+      rename(r0 = Estimate_Intercept , g = Estimate_n_new , r0.lower = .lower_Intercept, r0.upper = .upper_Intercept, g.lower = .lower_n_new, g.upper = .upper_n_new) %>% 
       dplyr::select(Island, r0, r0.lower, r0.upper, g, g.lower, g.upper)
     
     }else if(density_variable == "N"){
@@ -341,7 +344,7 @@ brm_blups_islands<-function(brm_model,density_variable, fitness, divide_intercep
         ungroup() %>% 
         rename(r0 = b_Intercept, g = b_N) %>% 
         median_qi(r0, g) %>%
-        mutate(Island = "meta-population") %>% 
+        mutate(Island = "metapopulation") %>% 
         dplyr::select(Island, r0, r0.lower, r0.upper, g, g.lower, g.upper)
       
       brm_blups<- brm_islands %>% 
@@ -389,7 +392,7 @@ brm_blups_islands<-function(brm_model,density_variable, fitness, divide_intercep
         ungroup() %>% 
         rename(r0 = b_Intercept, g = b_mc_N) %>% 
         median_qi(r0, g) %>%
-        mutate(Island = "meta-population") %>% 
+        mutate(Island = "metapopulation") %>% 
         dplyr::select(Island, r0, r0.lower, r0.upper, g, g.lower, g.upper)
       
       brm_blups<- brm_islands %>% 
@@ -401,9 +404,9 @@ brm_blups_islands<-function(brm_model,density_variable, fitness, divide_intercep
   } else if(density_variable == "zmc_N"){
 
     brm_islands<-brm_model %>% 
-      spread_draws(b_Intercept, b_zNR,b_in_out,`b_zNR:in_out`, r_Location[Location,Parameter]) %>% 
-      mutate(Estimate = case_when(Parameter == "zNR" & !Location %in%  outer$Location ~ b_zNR+ r_Location,
-                                  Parameter == "zNR" & Location %in%  outer$Location ~ b_zNR+ r_Location + `b_zNR:in_out`,
+      spread_draws(b_Intercept, b_zNR_new,b_in_out,`b_zNR_new:in_out`, r_Location[Location,Parameter]) %>% 
+      mutate(Estimate = case_when(Parameter == "zNR_new" & !Location %in%  outer$Location ~ b_zNR_new+ r_Location,
+                                  Parameter == "zNR_new" & Location %in%  outer$Location ~ b_zNR_new+ r_Location + `b_zNR_new:in_out`,
                                   Parameter == "Intercept" & !Location %in%  outer$Location ~ b_Intercept+r_Location,
                                   Parameter == "Intercept" & Location %in%  outer$Location ~b_Intercept+r_Location + b_in_out))%>% 
       rename(Island = Location)
@@ -411,7 +414,7 @@ brm_blups_islands<-function(brm_model,density_variable, fitness, divide_intercep
     
     if(average_metapars == "yes"){
       brm_islands<-brm_islands %>% 
-        mutate(b_zNR = b_zNR + `b_zNR:in_out`/2) %>% 
+        mutate(b_zNR_new = b_zNR_new + `b_zNR_new:in_out`/2) %>% 
         mutate(b_Intercept = b_Intercept + b_in_out/2)
     } else if(average_metapars == "no"){
       print("Warning, when metapars is set to no the metapopulation intercept and slope represent inner islands")
@@ -435,18 +438,18 @@ brm_blups_islands<-function(brm_model,density_variable, fitness, divide_intercep
     
     brm_metapop<-brm_islands %>% 
       ungroup() %>% 
-      rename(r0 = b_Intercept, g = b_zNR) %>% 
+      rename(r0 = b_Intercept, g = b_zNR_new) %>% 
       median_qi(r0, g) %>%
-      mutate(Island = "meta-population") %>% 
+      mutate(Island = "metapopulation") %>% 
       dplyr::select(Island, r0, r0.lower, r0.upper, g, g.lower, g.upper)
     
     brm_blups<- brm_islands %>% 
       median_qi(Estimate) %>% 
       pivot_wider(values_from = c(Estimate, .lower, .upper), names_from = Parameter) %>% 
-      rename(r0 = Estimate_Intercept , g = Estimate_zNR , r0.lower = .lower_Intercept, r0.upper = .upper_Intercept, g.lower = .lower_zNR, g.upper = .upper_zNR) %>% 
+      rename(r0 = Estimate_Intercept , g = Estimate_zNR_new , r0.lower = .lower_Intercept, r0.upper = .upper_Intercept, g.lower = .lower_zNR_new, g.upper = .upper_zNR_new) %>% 
       dplyr::select(Island, r0, r0.lower, r0.upper, g, g.lower, g.upper)
   } else {
-    print("error, density_variable must be either n, N, mc_N or zmc_N")
+    print("error, density_variable must be either n_new, N, mc_N or zmc_N")
   }
   
 
@@ -463,6 +466,7 @@ brm_blups_islands<-function(brm_model,density_variable, fitness, divide_intercep
 get_single_island_estimates<-function(results_single_islands,divide_intercepts,summary){
 
   ind_islands<-names(results_single_islands)
+  
   
   all_isl_res <- NULL;
   
@@ -515,18 +519,24 @@ get_single_island_estimates<-function(results_single_islands,divide_intercepts,s
 #0.8 exludes the lower and upper 10% quantiles of the experienced pop sizes for the
 #predicted values of individual islands.
 
-island_slopes<-function(post_frame,popsize_frame,data_observed,mean_centred, density_variable, prob,v_ymin, v_ymax,w_ymin, w_ymax, fitness){
+island_slopes<-function(post_frame,popsize_frame,data_observed,mean_centred, density_variable,var_slopes,adjust_var, prob,v_ymin, v_ymax,w_ymin, w_ymax, fitness){
   library(tidyverse)
   library(rcartocolor)
   n_isl <- post_frame %>% 
-    filter(Island != "meta-population") %>% 
+    filter(Island != "metapopulation") %>% 
     nrow()
+  in_out <- data_observed %>% 
+    dplyr::select(Location, in_out) %>% 
+    unique() %>% 
+    arrange(Location)
+  
+  in_out<-in_out$in_out
   
   safe_colourblind_palette <- carto_pal(n_isl, "Safe")
   
-  if("meta-population" %in% post_frame$Island){
+  if("metapopulation" %in% post_frame$Island){
   post_frame<-post_frame %>% 
-    mutate(metapop = ifelse(Island == "meta-population", 1,
+    mutate(metapop = ifelse(Island == "metapopulation", 1,
                             0)) %>% 
     group_by(metapop) %>% 
     arrange(metapop,Island, by_group = T) %>% 
@@ -556,11 +566,11 @@ island_slopes<-function(post_frame,popsize_frame,data_observed,mean_centred, den
   par(mar = c(10,10,10,10))
   par(mgp=c(1,2,0)) #change distance betweens axis tick lables and tick marks. Firsta value is y, second x, and the third is the line holding the tick marks
   global_par<-post_frame %>% 
-    filter(Island == "meta-population")
+    filter(Island == "metapopulation")
   
   island_par<-post_frame %>% 
-    filter(Island != "meta-population")
-  if("meta-population" %in% post_frame$Island){
+    filter(Island != "metapopulation")
+  if("metapopulation" %in% post_frame$Island){
   island_colours<-c(safe_colourblind_palette, "#000000")
   } else{
     island_colours<-safe_colourblind_palette
@@ -571,6 +581,8 @@ island_slopes<-function(post_frame,popsize_frame,data_observed,mean_centred, den
        xlim = c(min(v_xlim), max(v_xlim)), 
        ylim = c(v_ymin, v_ymax))
   
+text(min(v_xlim) + adjust_var, v_ymin + abs(0.05*min(v_ymin)), bquote(sigma[gamma]^2 ~ "=" ~ .(var_slopes)), cex = 2.5)
+
   if(density_variable == "n"){
     x_label_v <- "Log adult density n"
   } else if(density_variable == "mc_N"){
@@ -590,7 +602,7 @@ island_slopes<-function(post_frame,popsize_frame,data_observed,mean_centred, den
     y_label_v <- "log average individual demographic contribution"
     #y_label_v <- bquote(.(y_label_v[1])~"v"["rS"])
   }else if(fitness == "recruitment"){
-    y_label_v = "log recruit production per female"
+    y_label_v = "log average recruit production"
     #y_label_v <- bquote(.(y_label_v[1])~"v"["r"])
     
   }else if(fitness == "survival"){
@@ -613,22 +625,23 @@ island_slopes<-function(post_frame,popsize_frame,data_observed,mean_centred, den
    
  
     
-    points(v_isl~popsize_isl, col=island_colours[i], lty = 1, type ="l", lwd = 7)
+    points(v_isl~popsize_isl, col=island_colours[i], lty = in_out[i] +1, type ="l", lwd = 7)
    
     }
     
   
 
-  if("meta-population" %in% post_frame$Island){
+  if("metapopulation" %in% post_frame$Island){
   v_glo<-global_par$r0 + global_par$g*v_xlim
   points(v_glo ~ v_xlim, col = "black", type = "l", lwd = 11)
   } else {}
   
   plot(1, type = "n", ann = FALSE,
        cex.axis = 3,
-       xlim = c(0, max(data_observed$estimated_pop_size)), 
+       xlim = c(0, max(data_observed$N_corr)), 
        ylim = c(w_ymin,w_ymax))
-  
+
+
 
   title(xlab = "Adult density N", cex.lab = 3.5,
         line = 8)
@@ -637,7 +650,7 @@ island_slopes<-function(post_frame,popsize_frame,data_observed,mean_centred, den
     y_label_w <- "Average individual demographic contribution"
     #y_label_w <- bquote(.(y_label_w[1])~"w"["rS"])
   }else if(fitness == "recruitment"){
-    y_label_w <- "Recruit production per female"
+    y_label_w <- "Average recruit production"
     #y_label_w <- bquote(.(y_label_w[1])~"w"["r"])
     
   }else if(fitness == "survival"){
@@ -654,7 +667,7 @@ island_slopes<-function(post_frame,popsize_frame,data_observed,mean_centred, den
   if(density_variable == "n"){
     N_metapop = exp(v_xlim)
   }else{
-  N_metapop <- seq(min(data_observed$estimated_pop_size), max(data_observed$estimated_pop_size), length.out = 1000)
+  N_metapop <- seq(min(data_observed$N_corr), max(data_observed$N_corr), length.out = 1000)
   }
 
 
@@ -664,7 +677,7 @@ island_slopes<-function(post_frame,popsize_frame,data_observed,mean_centred, den
     popsize_isl <- seq(min(ind_island$popsize),max(ind_island$popsize), length.out=1000)
     ind_island_par = subset(island_par, Island == island_par$Island[i])
     obs_pop_isl<- subset(data_observed,Location == island_par$Island[i])
-    N_popsize_isl <- seq(min(obs_pop_isl$estimated_pop_size), max(obs_pop_isl$estimated_pop_size), length.out = 1000)
+    N_popsize_isl <- seq(min(obs_pop_isl$N_corr), max(obs_pop_isl$N_corr), length.out = 1000)
     
     v_isl<-ind_island_par$r0 + ind_island_par$g*popsize_isl
     
@@ -676,14 +689,14 @@ island_slopes<-function(post_frame,popsize_frame,data_observed,mean_centred, den
 
     
  
-    points(exp(v_isl)~plot_popsize_isl, col=island_colours[i], lty = 1, type ="l", lwd = 7)
+    points(exp(v_isl)~plot_popsize_isl, col=island_colours[i], lty = in_out[i] +1, type ="l", lwd = 7)
     
   }
-  if("meta-population" %in% post_frame$Island){
+  if("metapopulation" %in% post_frame$Island){
   points(exp(v_glo) ~ N_metapop, col = "black", type = "l", lwd = 11)
   } else{}
   
-  if("meta-population" %in% post_frame$Island){
+  if("metapopulation" %in% post_frame$Island){
     meta_lty = 1
     
   } else{
@@ -692,7 +705,7 @@ island_slopes<-function(post_frame,popsize_frame,data_observed,mean_centred, den
   
   legend("topright", legend = str_to_title(post_frame$Island),
          
-         col=c(island_colours), lty=1,lwd=5, cex=2.5,
+         col=c(island_colours), lty=c(in_out+1,1),lwd=5, cex=2.5,
          title="Island", text.font=4, bg='darkgrey') #lty=c(1:11,meta_lty) if we want different line types for all the lines.
 
   
@@ -702,15 +715,15 @@ island_slopes_single<-function(post_frame, popsize_frame, mean_centred, prob,w_y
   library(tidyverse)
   library(rcartocolor)
   n_isl <- nrow(post_frame) %>% 
-    filter(Island != "meta-population") %>% 
+    filter(Island != "metapopulation") %>% 
     
   
   safe_colourblind_palette <- carto_pal(n_isl, "Safe")
   
   
-  if("meta-population" %in% post_frame$Island){
+  if("metapopulation" %in% post_frame$Island){
     post_frame<-post_frame %>% 
-      mutate(metapop = ifelse(Island == "meta-population", 1,
+      mutate(metapop = ifelse(Island == "metapopulation", 1,
                               0)) %>% 
       group_by(metapop) %>% 
       arrange(metapop,Island, by_group = T) %>% 
@@ -732,12 +745,12 @@ island_slopes_single<-function(post_frame, popsize_frame, mean_centred, prob,w_y
   par(mar = c(10,10,10,10))
   par(mgp=c(1,2,0)) #change distance betweens axis tick lables and tick marks. Firsta value is y, second x, and the third is the line holding the tick marks
   global_par<-post_frame %>% 
-    filter(Island == "meta-population")
+    filter(Island == "metapopulation")
   
   island_par<-post_frame %>% 
-    filter(Island != "meta-population")
+    filter(Island != "metapopulation")
   
-  if("meta-population" %in% post_frame$Island){
+  if("metapopulation" %in% post_frame$Island){
     island_colours<-c(safe_colourblind_palette, "#000000")
   } else{
     island_colours<-safe_colourblind_palette
@@ -748,6 +761,7 @@ island_slopes_single<-function(post_frame, popsize_frame, mean_centred, prob,w_y
        xlim = c(min(plot_popsizes), max(plot_popsizes)), 
        ylim = c(w_ymin, w_ymax))
   
+ 
   
   title(xlab = "n", cex.lab = 3.5,
         line = 8)

@@ -68,7 +68,6 @@ if(reverse_inner_outer == "yes"){
 if(add_difference_to_intercept == "yes"){
 CMR_juv_res<-CMR_juv_post %>% 
   mutate(mu_rec_phi = mu_rec_phi + mu_fledge_phi) %>% 
-  mutate(gamma_rec = gamma_rec + gamma_fledge) %>% 
   mutate(mu_rec_p = mu_rec_p + mu_p_fledge)
 
 } else if(add_difference_to_intercept == "no"){
